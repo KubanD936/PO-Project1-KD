@@ -18,6 +18,8 @@ public class ConnectionFactory {
         }
         //url of the schema in DB
         //5432 is port, postgres is the name of the DB, project1 is the name of schema
+        //Need to hide the postgres username and password within String url for best practice, to do that edit environment variables
+        //For tutorial on how to do that go to Week 2 Thursday, around 1:50 into the video
         String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=project1";
 
         //PostgreSQL Username
