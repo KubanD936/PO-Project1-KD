@@ -22,8 +22,8 @@ public class ReimbursementDAOLocal implements ReimbursementDAO{
     }
 
     @Override
-    public Reimbursement getReimbursementById(int id) {
-        return reimbursementTable.get(id);
+    public Reimbursement getReimbursementById(int reimbursement_id) {
+        return reimbursementTable.get(reimbursement_id);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class ReimbursementDAOLocal implements ReimbursementDAO{
     }
 
     @Override
-    public boolean deleteReimbursementById(int id) {
-        Reimbursement reimbursement =reimbursementTable.remove(id);
+    public boolean deleteReimbursementById(int reimbursement_id) {
+        Reimbursement reimbursement =reimbursementTable.remove(reimbursement_id);
         if(reimbursement == null){
             return false;
         }

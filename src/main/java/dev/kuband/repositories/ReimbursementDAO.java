@@ -10,7 +10,7 @@ public interface ReimbursementDAO {
     Reimbursement createReimbursement(Reimbursement reimbursement);
 
     //Retrieve reimbursement
-    Reimbursement getReimbursementById(int id);
+    Reimbursement getReimbursementById(int reimbursement_id);
 
     //Retrieve all reimbursements
     List<Reimbursement> getAllReimbursement();
@@ -22,6 +22,6 @@ public interface ReimbursementDAO {
     Reimbursement updateReimbursement(Reimbursement reimbursement);
 
     //Delete reimbursement
-    boolean deleteReimbursementById(int id);
+    boolean deleteReimbursementById(int reimbursement_id);
 
 }

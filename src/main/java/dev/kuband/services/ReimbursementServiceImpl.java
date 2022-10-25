@@ -23,8 +23,8 @@ public class ReimbursementServiceImpl implements ReimbursementService{
     }
 
     @Override
-    public Reimbursement getReimbursementById(int id) {
-        return this.reimbursementDAO.getReimbursementById(id);
+    public Reimbursement getReimbursementById(int reimbursement_id) {
+        return this.reimbursementDAO.getReimbursementById(reimbursement_id);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ReimbursementServiceImpl implements ReimbursementService{
     }
 
     @Override
-    public boolean deleteReimbursementById(int id) {
-        return this.reimbursementDAO.deleteReimbursementById(id);
+    public boolean deleteReimbursementById(int reimbursement_id) {
+        return this.reimbursementDAO.deleteReimbursementById(reimbursement_id);
     }
 }
