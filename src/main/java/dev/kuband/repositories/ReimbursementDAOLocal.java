@@ -2,6 +2,7 @@ package dev.kuband.repositories;
 
 import dev.kuband.entities.Reimbursement;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,8 @@ public class ReimbursementDAOLocal implements ReimbursementDAO{
 
     @Override
     public List<Reimbursement> getAllReimbursement() {
-        return null;
+        List<Reimbursement> reimbursementList = new ArrayList();
+        return reimbursementList;
     }
 
     @Override
