@@ -19,7 +19,7 @@ public class UsersDAOPostgres implements UsersDAO{
             preparedStatement.setString(3, users.getFirst_name());
             preparedStatement.setString(4, users.getLast_name());
             preparedStatement.setString(5, users.getEmail());
-            preparedStatement.setInt(6, Integer.parseInt(String.valueOf(users.getRole_type())));
+            preparedStatement.setString(6, users.getRole_type().name());
 
             preparedStatement.execute();
 
@@ -102,7 +102,7 @@ public class UsersDAOPostgres implements UsersDAO{
             preparedStatement.setString(3, users.getFirst_name());
             preparedStatement.setString(4, users.getLast_name());
             preparedStatement.setString(5, users.getEmail());
-            preparedStatement.setString(6, String.valueOf(users.getRole_type()));
+            preparedStatement.setString(6, users.getRole_type().name());
 
             preparedStatement.executeUpdate();
             return users;

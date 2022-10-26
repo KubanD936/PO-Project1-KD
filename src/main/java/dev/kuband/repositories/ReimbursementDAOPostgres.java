@@ -25,7 +25,7 @@ public class ReimbursementDAOPostgres implements ReimbursementDAO{
             preparedStatement.setInt(5, reimbursement.getReimbursement_submitter_user_id());
             preparedStatement.setInt(6, reimbursement.getReimbursement_resolved_by_user_id());
             preparedStatement.setInt(7, reimbursement.getReimbursement_type_id());
-            preparedStatement.setString(8, String.valueOf(reimbursement.getStatus()));
+            preparedStatement.setString(8, reimbursement.getStatus().name());
 
             preparedStatement.execute();
 
@@ -117,7 +117,7 @@ public class ReimbursementDAOPostgres implements ReimbursementDAO{
             preparedStatement.setInt(5, reimbursement.getReimbursement_submitter_user_id());
             preparedStatement.setInt(6, reimbursement.getReimbursement_resolved_by_user_id());
             preparedStatement.setInt(7, reimbursement.getReimbursement_type_id());
-            preparedStatement.setString(8, String.valueOf(reimbursement.getStatus()));
+            preparedStatement.setString(8, reimbursement.getStatus().name());
             preparedStatement.setInt(9, reimbursement.getReimbursement_id());
 
             preparedStatement.executeUpdate();
