@@ -15,7 +15,7 @@ public class UsersServiceImpl implements  UsersService{
 
     @Override
     public Users createUsers(Users users) {
-        if(users.getUsername() == null && users.getPassword() == null){
+        if(users.getUsername().length() == 0 && users.getPassword().length() == 0){
             throw new RuntimeException("Username and Password field can't be empty");
         }
         Users savedUsers = this.usersDAO.createUsers(users);
@@ -23,8 +23,13 @@ public class UsersServiceImpl implements  UsersService{
     }
 
     @Override
-    public Users getUsersbyId(int user_id) {
+    public Users getUsersById(int user_id) {
         return this.usersDAO.getUsersById(user_id);
+    }
+
+    @Override
+    public Users getUsersByUsername(String username) {
+        return null;
     }
 
     @Override
@@ -34,11 +39,18 @@ public class UsersServiceImpl implements  UsersService{
 
     @Override
     public Users updateUsers(Users users) {
-        if(users.getUsername() == null && users.getPassword() == null){
-            throw new RuntimeException("Username and Password field can't be empty");
+        if(users.getUsername().length() == 0 && users.getPassword().length() == 0){
+            throw new RuntimeException("Username and Password fields can't be empty");
         }
-        Users savedUsers = this.usersDAO.createUsers(users);
-        return this.usersDAO.updateUsers(users);
+        if(this.usersDAO.getUsersByUsername(users.getUsername()).getUsername().length() == 0){
+            Users savedUsers = this.usersDAO.createUsers(users);
+            //return this.usersDAO.updateUsers(users);
+            return savedUsers;
+        }
+        else{
+            throw new RuntimeException("That Username already exists");
+        }
+
     }
 
     @Override

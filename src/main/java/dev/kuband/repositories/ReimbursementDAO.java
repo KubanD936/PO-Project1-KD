@@ -12,8 +12,13 @@ public interface ReimbursementDAO {
     //Retrieve reimbursement
     Reimbursement getReimbursementById(int reimbursement_id);
 
+    //Retrieve pending reimbursement requests
+    List<Reimbursement> getPendingReimbursement();
+
     //Retrieve all reimbursements
     List<Reimbursement> getAllReimbursement();
+
+
 
     //Retrieve reimbursement based on user
     //List<Reimbursement> getReimbursementByUser(User user);

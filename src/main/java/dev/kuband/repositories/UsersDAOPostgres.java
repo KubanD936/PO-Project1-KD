@@ -62,6 +62,11 @@ public class UsersDAOPostgres implements UsersDAO{
     }
 
     @Override
+    public Users getUsersByUsername(String username) {
+        return null;
+    }
+
+    @Override
     public List<Users> getAllUsers() {
         try(Connection connection = ConnectionFactory.getConnection()){
             String sql = "select * from users";

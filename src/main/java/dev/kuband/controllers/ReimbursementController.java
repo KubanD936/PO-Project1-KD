@@ -51,7 +51,7 @@ public class ReimbursementController {
         }
         else {
             ctx.status(400);
-            ctx.result("Could not process your delete request");
+            ctx.result("Could not delete your reimbursement request");
         }
     };
 }

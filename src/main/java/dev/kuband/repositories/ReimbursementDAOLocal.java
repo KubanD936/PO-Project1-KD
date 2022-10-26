@@ -28,6 +28,11 @@ public class ReimbursementDAOLocal implements ReimbursementDAO{
     }
 
     @Override
+    public List<Reimbursement> getPendingReimbursement() {
+        return null;
+    }
+
+    @Override
     public List<Reimbursement> getAllReimbursement() {
         List<Reimbursement> reimbursementList = new ArrayList();
         return reimbursementList;
