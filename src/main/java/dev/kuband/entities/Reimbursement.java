@@ -12,7 +12,7 @@ public class Reimbursement {
     private int reimbursement_submitter_user_id;
     private int reimbursement_resolved_by_user_id;
     private int reimbursement_type_id;
-    private Status status;
+    private Status status = Status.PENDING;
 
     public Reimbursement() {
     }

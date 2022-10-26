@@ -14,7 +14,7 @@ public class ReimbursementDAOTests {
     @Test
     @Order(1)
     void create_book_test(){
-        Reimbursement newReimbursement = new Reimbursement(0, 100, "", "", "Misc", 0, 1, 0, Status.APPROVED);
+        Reimbursement newReimbursement = new Reimbursement(0,100, "", "", "Misc", 0, 1, 0, Status.APPROVED);
         Reimbursement savedReimbursement = reimbursementDAO.createReimbursement(newReimbursement);
         Assertions.assertNotEquals(0,savedReimbursement.getReimbursement_id());
     }

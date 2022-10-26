@@ -10,19 +10,21 @@ public class Users {
     private String first_name;
     private String last_name;
     private String email;
-    private String role;
+    private RoleType role_type = RoleType.EMPLOYEE;
+
+
 
     public Users() {
     }
 
-    public Users(int user_id, String username, String password, String first_name, String last_name, String email, String role) {
+    public Users(int user_id, String username, String password, String first_name, String last_name, String email, RoleType role_type) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
-        this.role = role;
+        this.role_type = role_type;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class Users {
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
-                ", role='" + role + '\'' +
+                ", role_type=" + role_type +
                 '}';
     }
 
@@ -43,12 +45,12 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Users users = (Users) o;
-        return user_id == users.user_id && Objects.equals(username, users.username) && Objects.equals(password, users.password) && Objects.equals(first_name, users.first_name) && Objects.equals(last_name, users.last_name) && Objects.equals(email, users.email) && Objects.equals(role, users.role);
+        return user_id == users.user_id && Objects.equals(username, users.username) && Objects.equals(password, users.password) && Objects.equals(first_name, users.first_name) && Objects.equals(last_name, users.last_name) && Objects.equals(email, users.email) && role_type == users.role_type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, password, first_name, last_name, email, role);
+        return Objects.hash(user_id, username, password, first_name, last_name, email, role_type);
     }
 
     public int getUser_id() {
@@ -99,11 +101,11 @@ public class Users {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public RoleType getRole_type() {
+        return role_type;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole_type(RoleType role_type) {
+        this.role_type = role_type;
     }
 }

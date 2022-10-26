@@ -15,18 +15,17 @@ public class ReimbursementDAOPostgres implements ReimbursementDAO{
     public Reimbursement createReimbursement(Reimbursement reimbursement) {
         try(Connection connection = ConnectionFactory.getConnection()){
             //inserting values into SQL table
-            String sql = "insert into reimbursement values(default, ?, default , default, ?, default, default, ?, default)";
+            String sql = "insert into reimbursement values(default, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement =connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             //Setting parameters for above SQL statement
-            preparedStatement.setInt(1, reimbursement.getReimbursement_id());
-            preparedStatement.setInt(2, reimbursement.getAmount());
-            preparedStatement.setString(3, reimbursement.getSubmitted());
-            preparedStatement.setString(4,reimbursement.getResolved());
-            preparedStatement.setString(5, reimbursement.getDescription());
-            preparedStatement.setInt(6, reimbursement.getReimbursement_submitter_user_id());
-            preparedStatement.setInt(7, reimbursement.getReimbursement_resolved_by_user_id());
-            preparedStatement.setInt(8, reimbursement.getReimbursement_type_id());
-            preparedStatement.setString(9, String.valueOf(reimbursement.getStatus()));
+            preparedStatement.setInt(1, reimbursement.getAmount());
+            preparedStatement.setString(2, reimbursement.getSubmitted());
+            preparedStatement.setString(3,reimbursement.getResolved());
+            preparedStatement.setString(4, reimbursement.getDescription());
+            preparedStatement.setInt(5, reimbursement.getReimbursement_submitter_user_id());
+            preparedStatement.setInt(6, reimbursement.getReimbursement_resolved_by_user_id());
+            preparedStatement.setInt(7, reimbursement.getReimbursement_type_id());
+            preparedStatement.setString(8, String.valueOf(reimbursement.getStatus()));
 
             preparedStatement.execute();
 
@@ -46,7 +45,7 @@ public class ReimbursementDAOPostgres implements ReimbursementDAO{
     @Override
     public Reimbursement getReimbursementById(int reimbursement_id) {
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql ="select * from reimbursements where reimbursement_id = ?";
+            String sql = "select * from reimbursements where reimbursement_id = ?";
             PreparedStatement preparedStatement =connection.prepareStatement(sql);
             preparedStatement.setInt(1,reimbursement_id);
 
@@ -108,7 +107,7 @@ public class ReimbursementDAOPostgres implements ReimbursementDAO{
     @Override
     public Reimbursement updateReimbursement(Reimbursement reimbursement) {
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "update reimbursement set amount = ?, submitted = ?, resolved = ?, description = ?, reimbursement_submitter_user_id = default, reimbursement_resolved_by_user_id = default, reimbursement_type_id = ?, status = ?, where reimbursement_id = ?";
+            String sql = "update reimbursement set amount = ?, submitted = ?, resolved = ?, description = ?, reimbursement_submitter_user_id = ?, reimbursement_resolved_by_user_id = ?, reimbursement_type_id = ?, status = ? where reimbursement_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setInt(1, reimbursement.getAmount());
