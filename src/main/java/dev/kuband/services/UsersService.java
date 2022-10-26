@@ -13,5 +13,5 @@ public interface UsersService {
 
     Users updateUsers(Users users);
 
-    boolean deleteUsersById(int reimbursement_id);
+    boolean deleteUsersById(int user_id);
 }
