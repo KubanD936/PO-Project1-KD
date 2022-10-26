@@ -116,6 +116,18 @@ public class UsersDAOPostgres implements UsersDAO{
 
     @Override
     public boolean deleteUsersById(int user_id) {
-        return false;
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "delete from users where user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, user_id);
+
+            preparedStatement.execute();
+            return true;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
