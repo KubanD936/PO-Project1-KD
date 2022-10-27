@@ -72,29 +72,6 @@ public class UsersController {
         ctx.result(usersString);
     };
 
-/*    public Handler getUsersByIdHandler = (ctx) ->{
-        int user_id = Integer.parseInt(ctx.pathParam("user_id"));
-        Users users = Driver.usersService.getUsersById(user_id);
-        Gson gson = new Gson();
-        String json = gson.toJson(users);
-        ctx.result(json);
-    };*/
-
-/*    public Handler getUsersByUsername = (ctx) ->{
-        String username = ctx.pathParam("username");
-        Users users = Driver.usersService.getUsersByUsername(username);
-        Gson gson = new Gson();
-        String json = gson.toJson(users);
-        ctx.result(json);
-    };
-
-    public Handler getAllUsers = (ctx) ->{
-        List<Users> users = Driver.usersService.();
-        Gson gson = new Gson();
-        String json = gson.toJson(users);
-        ctx.result(json);
-    };*/
-
     public Handler updateUsersHandler = (ctx) -> {
         if (Driver.currentLoggedUsers == null) {
             ctx.status(400);
@@ -120,3 +97,28 @@ public class UsersController {
         }
     };
 }
+
+/*    public Handler getUsersByIdHandler = (ctx) ->{
+        int user_id = Integer.parseInt(ctx.pathParam("user_id"));
+        Users users = Driver.usersService.getUsersById(user_id);
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        ctx.result(json);
+    };*/
+
+/*    public Handler getUsersByUsername = (ctx) ->{
+        String username = ctx.pathParam("username");
+        Users users = Driver.usersService.getUsersByUsername(username);
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        ctx.result(json);
+    };
+
+    public Handler getAllUsers = (ctx) ->{
+        List<Users> users = Driver.usersService.();
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        ctx.result(json);
+    };*/
+
+
