@@ -1,5 +1,7 @@
 package dev.kuband.repositories;
 
+import dev.kuband.entities.Reimbursement;
+import dev.kuband.entities.Status;
 import dev.kuband.entities.Users;
 import dev.kuband.util.ConnectionFactory;
 import dev.kuband.driver.Driver;
@@ -88,23 +90,84 @@ public class UsersDAOPostgres implements UsersDAO{
     }
 
     @Override
-    public Users updateUsers(Users users) {
+    public ArrayList<Reimbursement> login(Users users) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            ArrayList<Reimbursement> reimbursements = new ArrayList<>();
+            String sql = "select * from users where username = ? and password = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, users.getUsername());
+            preparedStatement.setString(2, users.getPassword());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            Users verified = new Users();
+            verified.setUser_id(resultSet.getInt("user_id"));
+            verified.setUsername(resultSet.getString("username"));
+            verified.setPassword(resultSet.getString("password"));
+            verified.setAdmin(resultSet.getBoolean("isAdmin"));
+            System.out.println(resultSet.getString("role_type"));
+            Driver.currentLoggedUsers = verified;
+            if (verified.isAdmin()) {
+                sql = "select * from reimbursement where status = ?";
+                PreparedStatement prepareStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, "PENDING");
+
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Reimbursement reimbursement = new Reimbursement();
+                    reimbursement.setReimbursement_id(resultSet.getInt("reimbursement_d"));
+                    reimbursement.setUser(resultSet.getString("username"));
+                    reimbursement.setAmount(resultSet.getInt("amount"));
+                    reimbursement.setDescription(resultSet.getString("description"));
+                    reimbursement.setStatus(Status.valueOf(resultSet.getString("status")));
+                    reimbursements.add(reimbursement);
+                }
+                return reimbursements;
+            } else {
+                sql = "select * from reimbursement where username = ?";
+                PreparedStatement prepareStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, users.getUsername());
+
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    Reimbursement reimbursement = new Reimbursement();
+                    reimbursement.setReimbursement_id(resultSet.getInt("reimbursement_id"));
+                    reimbursement.setUser(resultSet.getString("username"));
+                    reimbursement.setAmount(resultSet.getInt("amount"));
+                    reimbursement.setDescription(resultSet.getString("description"));
+                    reimbursement.setStatus(Status.valueOf(resultSet.getString("status")));
+                    reimbursements.add(reimbursement);
+                }
+                return reimbursements;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public String updateUsers(Users users) {
         try(Connection connection = ConnectionFactory.getConnection()){
             String sql = "update users set username = ?, password = ?, isAdmin = ? where user_id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             preparedStatement.setString(1, users.getUsername());
             preparedStatement.setString(2, users.getPassword());
             preparedStatement.setBoolean(3, users.isAdmin());
 
-            preparedStatement.executeUpdate();
-            return users;
-
-        }
-        catch (SQLException e) {
+            int rs = preparedStatement.executeUpdate();
+            if (rs == 0){
+                return "Change failed\r\nInvalid user";
+            } else {
+                return "Change success"+users.getUser_id() + " this user was updated";
+            }
+        } catch(SQLException e){
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 
     @Override

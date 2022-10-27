@@ -24,25 +24,33 @@ public class UsersServiceImpl implements  UsersService{
         return savedUsers;
     }
 
-
     @Override
-    public Users getUsersById(int user_id) {
-        return this.usersDAO.getUsersById(user_id);
-    }
-
-    @Override
-    public Users getUsersByUsername(String username) {
-        return null;
-    }
-
-    @Override
-    public List<Users> getAllUsers() {
-        return this.usersDAO.getAllUsers();
-    }
-
-    @Override
-    public Users updateUsers(Users users) {
+    public ArrayList<Reimbursement> login(Users users) {
         if(users.getUsername().length() == 0 && users.getPassword().length() == 0){
+            throw new RuntimeException("Username and Password field can't be empty");
+        } else {
+            ArrayList<Reimbursement> savedUsers = this.usersDAO.login(users);
+            return savedUsers;
+        }
+    }
+
+    @Override
+    public String updateIsAdminPrivilege(Users users) {
+        if(users.getUsername().length() == 0 && users.getPassword().length() == 0){
+            throw new RuntimeException("Username and Password field can't be empty");
+        } else {
+            String savedUsers = this.usersDAO.updateAdminPrivilege(users);
+            return savedUsers;
+        }
+    }
+
+    @Override
+    public String updateUsers(Users users) {
+        String savedReimbursement = this.usersDAO.updateUsers(users);
+        return savedReimbursement;
+    }
+}
+        /*if(users.getUsername().length() == 0 && users.getPassword().length() == 0){
             throw new RuntimeException("Username and Password fields can't be empty");
         }
         if(this.usersDAO.getUsersByUsername(users.getUsername()).getUsername().length() == 0){
@@ -54,10 +62,4 @@ public class UsersServiceImpl implements  UsersService{
             throw new RuntimeException("That Username already exists");
         }
 
-    }
-
-    @Override
-    public boolean deleteUsersById(int user_id) {
-        return this.usersDAO.deleteUsersById(user_id);
-    }
-}
+    }*/

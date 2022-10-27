@@ -1,6 +1,7 @@
 package dev.kuband.services;
 
 import dev.kuband.entities.Reimbursement;
+import dev.kuband.entities.Status;
 import dev.kuband.repositories.ReimbursementDAO;
 
 import java.util.List;
@@ -16,13 +17,23 @@ public class ReimbursementServiceImpl implements ReimbursementService{
     @Override
     public Reimbursement createReimbursement(Reimbursement reimbursement) {
 
-        //Set status of reimbursement to pending
-
-        if(reimbursement.getAmount() == 0){
-            throw new RuntimeException("Reimbursement amount can't be 0");
+        if (reimbursement.getDescription().length() == 0 && reimbursement.getAmount() == 0) {
+            throw new RuntimeException("description and amount cannot be empty");
+        } else {
+            Reimbursement savedReimbursement = this.reimbursementDAO.createReimbursement(reimbursement);
+            return savedReimbursement;
         }
-        Reimbursement savedReimbursement =this.reimbursementDAO.createReimbursement(reimbursement);
-        return savedReimbursement;
+    }
+    @Override
+    public String changeReimbursementStatus(int reimbursement_id, Status status) {
+        if (reimbursement_id <= 0) {
+            throw new RuntimeException("Reimbursement request id cannot be 0 or lower.");
+        } else if (status.equals(Status.PENDING)) {
+            throw new RuntimeException("Cannot change a reimbursement request to pending.");
+        } else {
+            String savedReimbursement = this.reimbursementDAO.changeStatus(reimbursement_id, status);
+            return savedReimbursement;
+        }
     }
 
     @Override
@@ -30,22 +41,4 @@ public class ReimbursementServiceImpl implements ReimbursementService{
         return this.reimbursementDAO.getReimbursementById(reimbursement_id);
     }
 
-    @Override
-    public List<Reimbursement> getAllReimbursement() {
-        return this.reimbursementDAO.getAllReimbursement();
-    }
-
-    @Override
-    public Reimbursement updateReimbursement(Reimbursement reimbursement) {
-        if(reimbursement.getAmount() == 0){
-            throw new RuntimeException("Reimbursement amount can't be 0");
-        }
-        Reimbursement savedReimbursement =this.reimbursementDAO.createReimbursement(reimbursement);
-        return this.reimbursementDAO.updateReimbursement(reimbursement);
-    }
-
-    @Override
-    public boolean deleteReimbursementById(int reimbursement_id) {
-        return this.reimbursementDAO.deleteReimbursementById(reimbursement_id);
-    }
 }

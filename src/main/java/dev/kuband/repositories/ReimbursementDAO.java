@@ -12,7 +12,6 @@ public interface ReimbursementDAO {
     //Create reimbursement
     Reimbursement createReimbursement(Reimbursement reimbursement);
 
-    ArrayList<Reimbursement> login(Users users);
 
     //Retrieve reimbursement
     Reimbursement getReimbursementById(int reimbursement_id);

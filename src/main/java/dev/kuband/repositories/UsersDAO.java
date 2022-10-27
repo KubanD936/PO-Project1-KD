@@ -16,7 +16,9 @@ public interface UsersDAO {
 
     List<Users> getAllUsers();
 
-    Users updateUsers(Users users);
+    ArrayList<Reimbursement> login(Users users);
+
+    String updateUsers(Users users);
 
     String updateAdminPrivilege(Users users);
 }

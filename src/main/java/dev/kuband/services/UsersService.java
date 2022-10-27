@@ -11,13 +11,14 @@ public interface UsersService {
 
     public ArrayList<Reimbursement> login(Users users);
 
-    Users getUsersById(int user_id);
+    String updateIsAdminPrivilege(Users users);
 
-    Users getUsersByUsername(String username);
+    String updateUsers(Users users);
 
-    List<Users> getAllUsers();
 
-    Users updateUsers(Users users);
+    //Users getUsersById(int user_id);
 
-    boolean deleteUsersById(int user_id);
+    //Users getUsersByUsername(String username);
+
+
 }
