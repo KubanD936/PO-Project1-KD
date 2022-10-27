@@ -36,7 +36,7 @@ public class ReimbursementController {
         ctx.result(json);
     };
 
-    public Handler viewAllReimbursements = (ctx) -> {
+    public Handler getAllReimbursements = (ctx) -> {
         String json = ctx.body();
         Gson gson = new Gson();
         ReimbursementDAOPostgres reimbursementDAOPostgres = new ReimbursementDAOPostgres();

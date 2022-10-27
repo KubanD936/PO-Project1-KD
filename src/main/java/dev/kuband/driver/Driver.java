@@ -25,27 +25,23 @@ public class Driver {
 
         //Reimbursements
 
-        app.get("books/{reimbursement_id}", reimbursementController.getReimbursementByIdHandler);
+        app.post("reimbursements", reimbursementController.createReimbursement);
 
-        app.get("books", reimbursementController.getAllReimbursement);
+        app.get("reimbursements/{reimbursement_id}", reimbursementController.getReimbursementByIdHandler);
 
-        app.post("books", reimbursementController.createReimbursement);
+        app.get("reimbursements", reimbursementController.getAllReimbursements);
 
-        app.put("books", reimbursementController.updateReimbursementHandler);
-
-        app.delete("books/{reimbursement_id}", reimbursementController.deleteReimbursementHandler);
+        app.put("reimbursements", reimbursementController.updateReimbursementHandler);
 
         //Users
 
-        app.get("users/{users_id}", usersController.getUsersByIdHandler);
-
-        app.get("users", usersController.getAllUsers);
-
         app.post("users", usersController.createUser);
 
-        app.put("users", usersController.updateUsersHandler);
+        app.get("users", usersController.logInHandler);
 
-        app.delete("users/{users_id}", usersController.deleteUsersHandler);
+        app.put("users/isAdmin", usersController.updateIsAdminHandler);
+
+        app.put("users", usersController.updateUsersHandler);
 
         app.start();
     }

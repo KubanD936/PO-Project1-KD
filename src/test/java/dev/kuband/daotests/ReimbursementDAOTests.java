@@ -9,7 +9,7 @@ import org.junit.jupiter.api.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ReimbursementDAOTests {
 
-    static ReimbursementDAO reimbursementDAO = new ReimbursementDAOPostgres();
+    /*static ReimbursementDAO reimbursementDAO = new ReimbursementDAOPostgres();
 
     @Test
     @Order(1)
@@ -41,6 +41,6 @@ public class ReimbursementDAOTests {
     void delete_reimbursement_by_id_test(){
         boolean result = reimbursementDAO.deleteReimbursementById(1);
         Assertions.assertTrue(result);
-    }
+    }*/
 
 }
