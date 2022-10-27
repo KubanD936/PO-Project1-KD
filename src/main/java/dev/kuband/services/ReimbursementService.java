@@ -9,8 +9,12 @@ public interface ReimbursementService {
     //Create reimbursement
     Reimbursement createReimbursement(Reimbursement reimbursement);
 
+    Reimbursement getReimbursementById(int reimbursement_id);
+
     String changeReimbursementStatus(int reimbursement_id, Status status);
 
-    //Retrieve reimbursement
-    Reimbursement getReimbursementById(int reimbursement_id);
+    List<Reimbursement> getAllReimbursement();
+
+    List<Reimbursement> getPendingReimbursement();
+
 }

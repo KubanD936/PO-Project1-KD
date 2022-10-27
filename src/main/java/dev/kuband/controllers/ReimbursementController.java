@@ -36,9 +36,10 @@ public class ReimbursementController {
         ctx.result(json);
     };
 
+    //View tickets
     public Handler getAllReimbursements = (ctx) -> {
-        String json = ctx.body();
-        Gson gson = new Gson();
+        /*String json = ctx.body();
+        Gson gson = new Gson();*/
         ReimbursementDAOPostgres reimbursementDAOPostgres = new ReimbursementDAOPostgres();
         String reimbursements = String.valueOf(reimbursementDAOPostgres.getAllReimbursement());
         if (reimbursements.equals("Not logged in!")){
@@ -50,6 +51,20 @@ public class ReimbursementController {
         }
         ctx.result(reimbursements);
     };
+
+/*
+    public Handler getPendingReimbursements = (ctx) ->{
+        try{
+            String json = ctx.body();
+            Gson gson = new Gson();
+            ReimbursementDAOPostgres reimbursementDAOPostgres = new ReimbursementDAOPostgres();
+            List<Reimbursement> reimbursements = Driver.reimbursementService.getPendingReimbursement();
+        }
+        catch(){
+
+        }
+
+    };*/
 
     public Handler updateReimbursementHandler = (ctx) -> {
         String reimbursementJSON = ctx.body();

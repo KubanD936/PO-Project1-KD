@@ -1,5 +1,6 @@
 package dev.kuband.services;
 
+import dev.kuband.driver.Driver;
 import dev.kuband.entities.Reimbursement;
 import dev.kuband.entities.Status;
 import dev.kuband.repositories.ReimbursementDAO;
@@ -34,6 +35,19 @@ public class ReimbursementServiceImpl implements ReimbursementService{
             String savedReimbursement = this.reimbursementDAO.changeStatus(reimbursement_id, status);
             return savedReimbursement;
         }
+    }
+
+    @Override
+    public List<Reimbursement> getAllReimbursement() {
+        return this.reimbursementDAO.getAllReimbursement();
+    }
+
+    @Override
+    public List<Reimbursement> getPendingReimbursement() {
+        if(!Driver.currentLoggedUsers.isAdmin() || Driver.currentLoggedUsers == null){
+            throw new RuntimeException("Log in as an admin to do that") ;
+        }
+            return this.reimbursementDAO.getPendingReimbursement();
     }
 
     @Override
