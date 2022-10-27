@@ -1,9 +1,7 @@
 package dev.kuband.repositories;
 
 import dev.kuband.entities.Reimbursement;
-import dev.kuband.entities.ReimbursementType;
 import dev.kuband.entities.Status;
-import dev.kuband.entities.Users;
 import dev.kuband.util.ConnectionFactory;
 import dev.kuband.driver.Driver;
 
