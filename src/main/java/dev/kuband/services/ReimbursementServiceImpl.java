@@ -15,6 +15,9 @@ public class ReimbursementServiceImpl implements ReimbursementService{
 
     @Override
     public Reimbursement createReimbursement(Reimbursement reimbursement) {
+
+        //Set status of reimbursement to pending
+
         if(reimbursement.getAmount() == 0){
             throw new RuntimeException("Reimbursement amount can't be 0");
         }

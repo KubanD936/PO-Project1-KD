@@ -9,6 +9,10 @@ import java.util.List;
 
 public class ReimbursementController {
 
+
+    //Create try catches, so that catch can throw custom exception
+    //Create has 3 exceptions
+    //Exception doesn't have an amount and description
     public Handler createReimbursement = (ctx)->{
         String json =ctx.body();
         Gson gson = new Gson();
@@ -44,14 +48,25 @@ public class ReimbursementController {
     };
 
     public Handler deleteReimbursementHandler = (ctx) -> {
-        int reimbursement_id = Integer.parseInt(ctx.pathParam("reimbursement_id"));
-        boolean result = Driver.reimbursementService.deleteReimbursementById(reimbursement_id);
-        if(result){
+        try{
+            int reimbursement_id = Integer.parseInt(ctx.pathParam("reimbursement_id"));
+            boolean result = Driver.reimbursementService.deleteReimbursementById(reimbursement_id);
             ctx.status(204);
         }
-        else {
+        //more specific exception
+        //catch (){
+
+       // }
+        catch(Exception e) {
             ctx.status(400);
             ctx.result("Could not delete your reimbursement request");
         }
+        /*if(result){
+            ctx.status(204);
+        }
+        else {
+
+            ctx.result("Could not delete your reimbursement request");
+        }*/
     };
 }

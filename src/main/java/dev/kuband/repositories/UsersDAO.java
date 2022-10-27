@@ -1,7 +1,9 @@
 package dev.kuband.repositories;
 
+import dev.kuband.entities.Reimbursement;
 import dev.kuband.entities.Users;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UsersDAO {
@@ -16,5 +18,9 @@ public interface UsersDAO {
 
     Users updateUsers(Users users);
 
-    boolean deleteUsersById(int user_id);
+    String usersGetReimbursements();
+
+    String updateAdminPrivilege(Users users);
+
+    String updateUsersInfo(Users users);
 }
