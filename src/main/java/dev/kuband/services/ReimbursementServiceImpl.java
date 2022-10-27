@@ -42,13 +42,13 @@ public class ReimbursementServiceImpl implements ReimbursementService{
         return this.reimbursementDAO.getAllReimbursement();
     }
 
-    @Override
+/*    @Override
     public List<Reimbursement> getPendingReimbursement() {
         if(!Driver.currentLoggedUsers.isAdmin() || Driver.currentLoggedUsers == null){
             throw new RuntimeException("Log in as an admin to do that") ;
         }
             return this.reimbursementDAO.getPendingReimbursement();
-    }
+    }*/
 
     @Override
     public Reimbursement getReimbursementById(int reimbursement_id) {

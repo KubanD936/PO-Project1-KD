@@ -15,6 +15,6 @@ public interface ReimbursementService {
 
     List<Reimbursement> getAllReimbursement();
 
-    List<Reimbursement> getPendingReimbursement();
+    /*List<Reimbursement> getPendingReimbursement();*/
 
 }
