@@ -12,9 +12,6 @@ public interface ReimbursementDAO {
     //Create reimbursement
     Reimbursement createReimbursement(Reimbursement reimbursement);
 
-    //Retrieve pending reimbursement requests
-    List<Reimbursement> getReimbursementByStatus();
-
     ArrayList<Reimbursement> login(Users users);
 
     //Retrieve reimbursement
@@ -25,5 +22,5 @@ public interface ReimbursementDAO {
 
     String changeStatus(int reimbursement_id, Status status);
 
-
+    List<Reimbursement> getPendingReimbursement();
 }

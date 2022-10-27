@@ -18,9 +18,5 @@ public interface UsersDAO {
 
     Users updateUsers(Users users);
 
-    String usersGetReimbursements();
-
     String updateAdminPrivilege(Users users);
-
-    String updateUsersInfo(Users users);
 }

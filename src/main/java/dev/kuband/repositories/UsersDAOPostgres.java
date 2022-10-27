@@ -1,8 +1,8 @@
 package dev.kuband.repositories;
 
-import dev.kuband.entities.Reimbursement;
 import dev.kuband.entities.Users;
 import dev.kuband.util.ConnectionFactory;
+import dev.kuband.driver.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class UsersDAOPostgres implements UsersDAO{
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, users.getUsername());
             preparedStatement.setString(2, users.getPassword());
-            preparedStatement.setString(3, String.valueOf(users.isAdmin()));
+            preparedStatement.setBoolean(3, users.isAdmin());
 
             preparedStatement.execute();
 
@@ -45,7 +45,7 @@ public class UsersDAOPostgres implements UsersDAO{
             users.setUser_id(resultSet.getInt("user_id"));
             users.setUsername(resultSet.getString("username"));
             users.setPassword(resultSet.getString("password"));
-            users.setRole_type(RoleType.valueOf(resultSet.getString("role_type")));
+            users.setAdmin(resultSet.getBoolean("isAdmin"));
 
             return users;
 
@@ -75,7 +75,7 @@ public class UsersDAOPostgres implements UsersDAO{
                 users.setUser_id(resultSet.getInt("user_id"));
                 users.setUsername(resultSet.getString("username"));
                 users.setPassword(resultSet.getString("password"));
-                users.setRole_type(RoleType.valueOf(resultSet.getString("role_type")));
+                users.setAdmin(resultSet.getBoolean("isAdmin"));
                 usersList.add(users);
             }
             return usersList;
@@ -90,12 +90,12 @@ public class UsersDAOPostgres implements UsersDAO{
     @Override
     public Users updateUsers(Users users) {
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "update users set username = ?, password = ?, first_name = ?, last_name = ?, email = ?, role_type = ? where user_id = ?";
+            String sql = "update users set username = ?, password = ?, isAdmin = ? where user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, users.getUsername());
             preparedStatement.setString(2, users.getPassword());
-            preparedStatement.setString(6, users.getRole_type().name());
+            preparedStatement.setBoolean(3, users.isAdmin());
 
             preparedStatement.executeUpdate();
             return users;
@@ -108,34 +108,34 @@ public class UsersDAOPostgres implements UsersDAO{
     }
 
     @Override
-    public String usersGetReimbursements() {
-        return null;
-    }
-
-    @Override
     public String updateAdminPrivilege(Users users) {
-        return null;
-    }
-
-    @Override
-    public String updateUsersInfo(Users users) {
-        return null;
-    }
-
-    @Override
-    public boolean deleteUsersById(int user_id) {
+        if (Driver.currentLoggedUsers == null){
+            return "You are not logged in";
+        } else if(!Driver.currentLoggedUsers.isAdmin()){
+            return "Need to be admin to edit this";
+        } else if(users.getUser_id() == Driver.currentLoggedUsers.getUser_id()){
+            return "You can't modify your own account";
+        }
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "delete from users where user_id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setInt(1, user_id);
-
-            preparedStatement.execute();
-            return true;
-        }
-        catch (SQLException e) {
+            String sql = "update users set isAdmin = ? where user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setBoolean(1, users.isAdmin());
+            preparedStatement.setInt(2, users.getUser_id());
+            int rs = preparedStatement.executeUpdate();
+            if (rs == 0){
+                return "Change failed\r\nMake sure your id is valid";
+            } else {
+                if (users.isAdmin()){
+                    return "User " + users.getUser_id() + " has been changed to Admin";
+                } else {
+                    return "User " + users.getUser_id() + " has been changed to User";
+                }
+            }
+        } catch(SQLException e){
             e.printStackTrace();
-            return false;
         }
+        return null;
     }
+
+
 }

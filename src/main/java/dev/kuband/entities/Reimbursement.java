@@ -9,18 +9,16 @@ public class Reimbursement {
     private String user;
     private int amount;
     private String description;
-    private ReimbursementType reimbursementType;
     private Status status = Status.PENDING;
 
     public Reimbursement() {
     }
 
-    public Reimbursement(int reimbursement_id, String user, int amount, String description, ReimbursementType reimbursementType, Status status) {
+    public Reimbursement(int reimbursement_id, String user, int amount, String description, Status status) {
         this.reimbursement_id = reimbursement_id;
         this.user = user;
         this.amount = amount;
         this.description = description;
-        this.reimbursementType = reimbursementType;
         this.status = status;
     }
 
@@ -31,7 +29,6 @@ public class Reimbursement {
                 ", user='" + user + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
-                ", reimbursementType=" + reimbursementType +
                 ", status=" + status +
                 '}';
     }
@@ -41,12 +38,12 @@ public class Reimbursement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reimbursement that = (Reimbursement) o;
-        return reimbursement_id == that.reimbursement_id && amount == that.amount && Objects.equals(user, that.user) && Objects.equals(description, that.description) && reimbursementType == that.reimbursementType && status == that.status;
+        return reimbursement_id == that.reimbursement_id && amount == that.amount && Objects.equals(user, that.user) && Objects.equals(description, that.description) && status == that.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reimbursement_id, user, amount, description, reimbursementType, status);
+        return Objects.hash(reimbursement_id, user, amount, description, status);
     }
 
     public int getReimbursement_id() {
@@ -79,14 +76,6 @@ public class Reimbursement {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public ReimbursementType getReimbursementType() {
-        return reimbursementType;
-    }
-
-    public void setReimbursementType(ReimbursementType reimbursementType) {
-        this.reimbursementType = reimbursementType;
     }
 
     public Status getStatus() {
