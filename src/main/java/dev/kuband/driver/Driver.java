@@ -23,27 +23,13 @@ public class Driver {
         ReimbursementController reimbursementController = new ReimbursementController();
         UsersController usersController = new UsersController();
 
-        /*
-        app.post("/createEmployee", employeeController.createEmployee);
-        app.post("/createTicket", ticketController.createTicket);
-        app.post("/login", employeeController.login);
-        app.get("/getTickets", ticketController.viewTickets);
-        app.post("/changeStatus", ticketController.updateTicket);
-        app.post("/getTicketbyType", ticketController.readTicketbyType);
-        app.post("/updateEmployeeAdmin", employeeController.updateAdmin);
-        app.post("/picture/{id}", ticketController.updateTicketPicture);
-        app.post("/employeePicture/{id}", employeeController.updateEmployeePicture);
-        app.post("/employeeupdate", employeeController.updateEmployeeInfo);
-        app.get("/employeeInfo", employeeController.readEmployeeProfile);
-        */
-
         //Reimbursements
 
         app.post("/createReimbursement", reimbursementController.createReimbursement);
 
         app.get("/getReimbursements", reimbursementController.getAllReimbursements);
 
-        app.put("/reimbursements", reimbursementController.updateReimbursementHandler);
+        app.post("/reimbursements", reimbursementController.updateReimbursementHandler);
 
         app.post("/changeStatus", reimbursementController.updateReimbursementHandler);
 
@@ -57,9 +43,9 @@ public class Driver {
 
         app.post("/users", usersController.logInHandler);
 
-        app.put("/updateUserToAdmin", usersController.updateIsAdminHandler);
+        app.post("/updateUserToAdmin", usersController.updateIsAdminHandler);
 
-        app.put("/updateUsers", usersController.updateUsersHandler);
+        app.post("/updateUsers", usersController.updateUsersHandler);
 
         app.start();
     }
