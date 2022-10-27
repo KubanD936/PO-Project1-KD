@@ -12,7 +12,7 @@ public interface UsersDAO {
 
     Users getUsersById(int user_id);
 
-    Users getUsersByUsername(String username);
+    /*Users getUsersByUsername(String username);*/
 
     List<Users> getAllUsers();
 

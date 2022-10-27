@@ -127,7 +127,7 @@ public class ReimbursementDAOPostgres implements ReimbursementDAO {
         return null;
     }
 
-    @Override
+/*    @Override
     public List<Reimbursement> getPendingReimbursement() {
         try (Connection connection = ConnectionFactory.getConnection()) {
             String sql = "select * from reimbursement where status = ?";
@@ -153,5 +153,5 @@ public class ReimbursementDAOPostgres implements ReimbursementDAO {
             e.printStackTrace();
         }
         return null;
-    }
+    }*/
 }

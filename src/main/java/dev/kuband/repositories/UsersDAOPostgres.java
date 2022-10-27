@@ -57,10 +57,10 @@ public class UsersDAOPostgres implements UsersDAO{
         }
     }
 
-    @Override
+    /*@Override
     public Users getUsersByUsername(String username) {
         return null;
-    }
+    }*/
 
     @Override
     public List<Users> getAllUsers() {
