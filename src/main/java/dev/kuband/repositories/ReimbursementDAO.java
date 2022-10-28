@@ -7,7 +7,7 @@ import dev.kuband.entities.Users;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ReimbursementDAO {
+/*public interface ReimbursementDAO {
 
     //Create reimbursement
     Reimbursement createReimbursement(Reimbursement reimbursement);
@@ -21,5 +21,5 @@ public interface ReimbursementDAO {
 
     String changeStatus(int reimbursement_id, Status status);
 
-    /*List<Reimbursement> getPendingReimbursement();*/
-}
+    *//*List<Reimbursement> getPendingReimbursement();*//*
+}*/

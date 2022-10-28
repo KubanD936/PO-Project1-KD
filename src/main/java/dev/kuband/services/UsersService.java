@@ -9,7 +9,9 @@ import java.util.List;
 public interface UsersService {
     Users createUsers (Users users);
 
-    public ArrayList<Reimbursement> login(Users users);
+    /*public ArrayList<Reimbursement> login(Users users);*/
+
+    boolean loginUsers(Users users);
 
     String updateIsAdminPrivilege(Users users);
 

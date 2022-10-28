@@ -3,7 +3,8 @@ package dev.kuband.controllers;
 import com.google.gson.Gson;
 import dev.kuband.driver.Driver;
 import dev.kuband.entities.Reimbursement;
-import dev.kuband.repositories.ReimbursementDAOPostgres;
+/*import dev.kuband.repositories.ReimbursementDAOPostgres;*/
+import dev.kuband.repositories.UsersAndReimbursementDAOPostgres;
 import io.javalin.http.Handler;
 
 import java.util.List;
@@ -40,8 +41,8 @@ public class ReimbursementController {
     public Handler getAllReimbursements = (ctx) -> {
         /*String json = ctx.body();
         Gson gson = new Gson();*/
-        ReimbursementDAOPostgres reimbursementDAOPostgres = new ReimbursementDAOPostgres();
-        String reimbursements = String.valueOf(reimbursementDAOPostgres.getAllReimbursement());
+        UsersAndReimbursementDAOPostgres usersAndReimbursementDAOPostgres = new UsersAndReimbursementDAOPostgres();
+        String reimbursements = String.valueOf(usersAndReimbursementDAOPostgres.getAllReimbursement());
         if (reimbursements.equals("Not logged in!")){
             ctx.status(401);
             ctx.result("Not logged in");
@@ -70,7 +71,7 @@ public class ReimbursementController {
         String reimbursementJSON = ctx.body();
         Gson gson = new Gson();
         Reimbursement reimbursement = gson.fromJson(reimbursementJSON, Reimbursement.class);
-        ReimbursementDAOPostgres reimbursementDAOPostgres = new ReimbursementDAOPostgres();
+        UsersAndReimbursementDAOPostgres usersAndReimbursementDAOPostgres = new UsersAndReimbursementDAOPostgres();
         String updateReimbursement = Driver.reimbursementService.changeReimbursementStatus(reimbursement.getReimbursement_id(), reimbursement.getStatus());
         switch (updateReimbursement){
             case"Reimbursement already approved and cannot be changed.":

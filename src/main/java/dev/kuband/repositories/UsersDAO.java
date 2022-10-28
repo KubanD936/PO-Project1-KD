@@ -6,13 +6,13 @@ import dev.kuband.entities.Users;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface UsersDAO {
+/*public interface UsersDAO {
 
     Users createUsers(Users users);
 
     Users getUsersById(int user_id);
 
-    /*Users getUsersByUsername(String username);*/
+    *//*Users getUsersByUsername(String username);*//*
 
     List<Users> getAllUsers();
 
@@ -21,4 +21,4 @@ public interface UsersDAO {
     String updateUsers(Users users);
 
     String updateAdminPrivilege(Users users);
-}
+}*/

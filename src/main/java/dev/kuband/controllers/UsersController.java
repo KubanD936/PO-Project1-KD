@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import dev.kuband.driver.Driver;
 import dev.kuband.entities.Reimbursement;
 import dev.kuband.entities.Users;
-import dev.kuband.repositories.UsersDAOPostgres;
+/*import dev.kuband.repositories.UsersDAOPostgres;*/
 import io.javalin.http.Handler;
 
 import java.util.ArrayList;
@@ -16,8 +16,10 @@ public class UsersController {
         String json = ctx.body();
         Gson gson = new Gson();
         Users users = gson.fromJson(json, Users.class);
-        UsersDAOPostgres usersDAOPostgres = new UsersDAOPostgres();
+        /*System.out.println(users);*/
+        /*UsersDAOPostgres usersDAOPostgres = new UsersDAOPostgres();*/
         Users newUsers = Driver.usersService.createUsers(users);
+        System.out.println("this is from newUsers" + newUsers);
 
         if (newUsers == null) {
             ctx.status(400);
@@ -26,32 +28,47 @@ public class UsersController {
             ctx.status(200);
             ctx.result("Account created successfully");
         }
-        String userJson = gson.toJson(newUsers);
+        /*String userJson = gson.toJson(newUsers);
         ctx.status(201);
-        ctx.result(userJson);
+        ctx.result(userJson);*/
     };
 
-    public Handler logInHandler = (ctx) -> {
+    public Handler loginUsers = (ctx) ->{
+        String usersJson = ctx.body();
+        Gson gson = new Gson();
+        Users users = gson.fromJson(usersJson, Users.class);
+        boolean result = Driver.usersService.loginUsers(users);
+        if(result){
+            ctx.status(202);
+            ctx.result("Successfully logged in");
+        }
+        else{
+            ctx.status(400);
+            ctx.result("Could not process your login request");
+        }
+    };
+
+    /*public Handler login = (ctx) -> {
         String json = ctx.body();
         Gson gson = new Gson();
         Users users = gson.fromJson(json, Users.class);
-        ArrayList<Reimbursement> newUsers = Driver.usersService.login(users);
+        ArrayList<Reimbursement> newReimbursements = Driver.usersService.login(users);
         String jsonString = "";
-        if (newUsers == null) {
+        if (newReimbursements == null) {
             jsonString = "Invalid username or password";
             ctx.status(406);
             ctx.result(jsonString);
-        } else if (newUsers.size() == 0) {
+        } else if (newReimbursements.size() == 0) {
             ctx.status(404);
-            ctx.result("No tickets");
+            ctx.result("UsersController No tickets");
         } else {
-            for (int i = 0; i < newUsers.size(); i++) {
-                jsonString += newUsers.get(i).toString() + "\n\r";
+            for (int i = 0; i < newReimbursements.size(); i++) {
+                jsonString += newReimbursements.get(i).toString() + "\n\r";
             }
             ctx.status(202);
             ctx.result(jsonString);
         }
-    };
+    };*/
 
     public Handler updateIsAdminHandler = (ctx) -> {
         String json = ctx.body();
@@ -73,21 +90,21 @@ public class UsersController {
     };
 
     public Handler updateUsersHandler = (ctx) -> {
-        if (Driver.currentLoggedUsers == null) {
+        if (Driver.currentUsers == null) {
             ctx.status(400);
             ctx.result("Need to log in");
         } else {
             String usersJson = ctx.body();
             Gson gson = new Gson();
             Users users = gson.fromJson(usersJson, Users.class);
-            users.setUsername(Driver.currentLoggedUsers.getUsername());
-            users.setAdmin(Driver.currentLoggedUsers.isAdmin());
-            users.setUser_id(Driver.currentLoggedUsers.getUser_id());
+            users.setUsername(Driver.currentUsers.getUsername());
+            users.setAdmin(Driver.currentUsers.isAdmin());
+            users.setUser_id(Driver.currentUsers.getUser_id());
             if (users.getPassword() == null){
-                users.setPassword(Driver.currentLoggedUsers.getPassword());
+                users.setPassword(Driver.currentUsers.getPassword());
             }
             String employeeString = Driver.usersService.updateUsers(users);
-            if (Driver.currentLoggedUsers == null){
+            if (Driver.currentUsers == null){
                 ctx.status(400);
                 ctx.result("You are not logged in!");
             } else{

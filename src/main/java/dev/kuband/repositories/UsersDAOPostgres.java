@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersDAOPostgres implements UsersDAO{
+/*public class UsersDAOPostgres implements UsersDAO{
     @Override
     public Users createUsers(Users users) {
         try(Connection connection = ConnectionFactory.getConnection()){
@@ -26,6 +26,7 @@ public class UsersDAOPostgres implements UsersDAO{
             resultSet.next();
             int generatedKey = resultSet.getInt("user_id");
             users.setUser_id(generatedKey);
+            System.out.println(users);
             return users;
 
         } catch (SQLException e) {
@@ -57,10 +58,10 @@ public class UsersDAOPostgres implements UsersDAO{
         }
     }
 
-    /*@Override
+    *//*@Override
     public Users getUsersByUsername(String username) {
         return null;
-    }*/
+    }*//*
 
     @Override
     public List<Users> getAllUsers() {
@@ -106,7 +107,7 @@ public class UsersDAOPostgres implements UsersDAO{
             verified.setUsername(resultSet.getString("username"));
             verified.setPassword(resultSet.getString("password"));
             verified.setAdmin(resultSet.getBoolean("isAdmin"));
-            System.out.println(resultSet.getString("role_type"));
+            *//*System.out.println(resultSet.getString("role_type"));*//*
             Driver.currentLoggedUsers = verified;
             if (verified.isAdmin()) {
                 sql = "select * from reimbursement where status = ?";
@@ -201,4 +202,4 @@ public class UsersDAOPostgres implements UsersDAO{
     }
 
 
-}
+}*/
