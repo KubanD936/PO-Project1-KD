@@ -1,13 +1,13 @@
 package dev.kuband.daotests;
 
-import dev.kuband.entities.Reimbursement;
-import dev.kuband.entities.Status;
 /*import dev.kuband.repositories.ReimbursementDAO;
 import dev.kuband.repositories.ReimbursementDAOPostgres;*/
+import dev.kuband.repositories.UsersAndReimbursementDAO;
+import dev.kuband.repositories.UsersAndReimbursementDAOPostgres;
 import org.junit.jupiter.api.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ReimbursementDAOTests {
+public class UsersAndReimbursementDAOPostgresTests {
 
     /*static ReimbursementDAO reimbursementDAO = new ReimbursementDAOPostgres();
 
