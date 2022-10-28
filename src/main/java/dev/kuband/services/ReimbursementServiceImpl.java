@@ -22,7 +22,7 @@ public class ReimbursementServiceImpl implements ReimbursementService{
     @Override
     public Reimbursement createReimbursement(Reimbursement reimbursement) {
 
-        if (reimbursement.getDescription().length() == 0 && reimbursement.getAmount() == 0) {
+        if (reimbursement.getDescription().length() == 0 || reimbursement.getAmount() <= 0) {
             throw new RuntimeException("description and amount cannot be empty");
         } else {
             Reimbursement savedReimbursement = this.usersAndReimbursementDAO.createReimbursement(reimbursement);

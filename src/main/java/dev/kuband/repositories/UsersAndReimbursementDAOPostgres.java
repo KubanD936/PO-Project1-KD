@@ -15,14 +15,14 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
     public Reimbursement createReimbursement(Reimbursement reimbursement) {
         try (Connection connection = ConnectionFactory.getConnection()) {
             //inserting values into SQL table
-            String sql = "insert into reimbursement values(default, ?, ?, ?, ?)";
+            String sql = "insert into reimbursements values(default, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             //Setting parameters for above SQL statement
             System.out.println(Driver.currentUsers.getUsername());
             preparedStatement.setString(1, Driver.currentUsers.getUsername());
             preparedStatement.setInt(2, reimbursement.getAmount());
             preparedStatement.setString(3, reimbursement.getDescription());
-            preparedStatement.setString(4, reimbursement.getStatus().name());
+            preparedStatement.setString(4, String.valueOf(reimbursement.getStatus()));
 
             preparedStatement.execute();
 
@@ -65,7 +65,7 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
     @Override
     public List<Reimbursement> getAllReimbursement() {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            String sql = "select * from reimbursement";
+            String sql = "select * from reimbursements";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -96,7 +96,7 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
             return "Need to be admin to change this";
         }
         try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "select * from reimbursement where reimbursement_id = ?";
+            String sql = "select * from reimbursements where reimbursement_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, reimbursement_id);
             ResultSet resultSet = preparedStatement.executeQuery();

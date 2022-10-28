@@ -16,7 +16,7 @@ public class ReimbursementController {
     //Create has 3 exceptions
     //Exception doesn't have an amount and description
     public Handler createReimbursement = (ctx)->{
-        String json =ctx.body();
+        String json = ctx.body();
         Gson gson = new Gson();
         Reimbursement reimbursement = gson.fromJson(json, Reimbursement.class);
         Reimbursement registeredReimbursement = Driver.reimbursementService.createReimbursement(reimbursement);
