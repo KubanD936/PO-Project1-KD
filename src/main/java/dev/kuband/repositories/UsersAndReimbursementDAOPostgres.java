@@ -65,7 +65,7 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
     @Override
     public List<Reimbursement> getAllReimbursement() {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            String sql = "select * from reimbursements";
+            String sql = "select * from reimbursements where status = 'PENDING'";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             ResultSet resultSet = preparedStatement.executeQuery();

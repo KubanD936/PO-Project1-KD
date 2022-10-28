@@ -55,6 +55,7 @@ public class ReimbursementServiceImpl implements ReimbursementService{
 
     @Override
     public List<Reimbursement> getAllReimbursementByUsers(Users users) {
+        users.setUsername(Driver.currentUsers.getUsername());
         return this.usersAndReimbursementDAO.getAllReimbursementByUsers(users);
     }
 

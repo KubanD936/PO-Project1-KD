@@ -75,6 +75,7 @@ public class ReimbursementController {
             String output = "";
             for (Reimbursement r : reimbursement) {
                 output += r.toString();
+                System.out.println(r.toString());
             }
             if (reimbursements.equals("Not logged in!")) {
                 ctx.status(401);
