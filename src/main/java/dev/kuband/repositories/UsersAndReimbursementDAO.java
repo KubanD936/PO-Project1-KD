@@ -25,11 +25,11 @@ public interface UsersAndReimbursementDAO {
 
     Users createUsers(Users users);
 
-    Users getUsersById(int user_id);
+//    Users getUsersById(int user_id);
 
     /*Users getUsersByUsername(String username);*/
 
-    List<Users> getAllUsers();
+//    List<Users> getAllUsers();
 
     boolean loginUsers(Users users);
 
@@ -37,5 +37,5 @@ public interface UsersAndReimbursementDAO {
 
     String updateUsers(Users users);
 
-    String updateAdminPrivilege(Users users);
+//    String updateAdminPrivilege(Users users);
 }

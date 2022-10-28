@@ -9,6 +9,55 @@ import org.junit.jupiter.api.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UsersAndReimbursementDAOPostgresTests {
 
+    static UsersAndReimbursementDAO usersAndReimbursementDAO = new UsersAndReimbursementDAOPostgres();
+
+    @Test
+    @Order(1)
+    void create_new_reimbursement_test(){
+
+    }
+
+    @Test
+    @Order(2)
+    void get_reimbursement_by_id_test(){
+
+    }
+
+    @Test
+    @Order(3)
+    void get_all_reimbursement_test(){
+
+    }
+
+    @Test
+    @Order(4)
+    void get_all_reimbursement_by_current_user_test(){
+
+    }
+
+    @Test
+    @Order(5)
+    void change_status_test(){
+
+    }
+
+    @Test
+    @Order(6)
+    void create_new_user_test(){
+
+    }
+
+    @Test
+    @Order(7)
+    void login_user_test(){
+
+    }
+
+    @Test
+    @Order(8)
+    void update_user_test(){
+
+    }
     /*static ReimbursementDAO reimbursementDAO = new ReimbursementDAOPostgres();
 
     @Test

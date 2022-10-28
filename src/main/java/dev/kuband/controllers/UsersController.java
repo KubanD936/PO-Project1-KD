@@ -70,24 +70,24 @@ public class UsersController {
         }
     };*/
 
-    public Handler updateIsAdminHandler = (ctx) -> {
-        String json = ctx.body();
-        Gson gson = new Gson();
-        Users users = gson.fromJson(json, Users.class);
-        String usersString = Driver.usersService.updateIsAdminPrivilege(users);
-        switch (usersString) {
-            case "Change failed\r\nVerify user id":
-                ctx.status(304);
-                break;
-            case "Not logged in":
-            case "Can't modify own account":
-                ctx.status(401);
-                break;
-            default:
-                ctx.status(202);
-        }
-        ctx.result(usersString);
-    };
+//    public Handler updateIsAdminHandler = (ctx) -> {
+//        String json = ctx.body();
+//        Gson gson = new Gson();
+//        Users users = gson.fromJson(json, Users.class);
+//        String usersString = Driver.usersService.updateIsAdminPrivilege(users);
+//        switch (usersString) {
+//            case "Change failed\r\nVerify user id":
+//                ctx.status(304);
+//                break;
+//            case "Not logged in":
+//            case "Can't modify own account":
+//                ctx.status(401);
+//                break;
+//            default:
+//                ctx.status(202);
+//        }
+//        ctx.result(usersString);
+//    };
 
     public Handler updateUsersHandler = (ctx) -> {
         if (Driver.currentUsers == null) {

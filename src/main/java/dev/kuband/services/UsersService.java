@@ -13,7 +13,7 @@ public interface UsersService {
 
     boolean loginUsers(Users users);
 
-    String updateIsAdminPrivilege(Users users);
+//    String updateIsAdminPrivilege(Users users);
 
     String updateUsers(Users users);
 
