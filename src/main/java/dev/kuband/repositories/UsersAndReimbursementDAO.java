@@ -17,6 +17,10 @@ public interface UsersAndReimbursementDAO {
     //Retrieve all reimbursements
     List<Reimbursement> getAllReimbursement();
 
+//    List<Reimbursement> getAllReimbursementByUsers();
+
+    List<Reimbursement> getAllReimbursementByUsers(Users users);
+
     String changeStatus(int reimbursement_id, Status status);
 
     Users createUsers(Users users);

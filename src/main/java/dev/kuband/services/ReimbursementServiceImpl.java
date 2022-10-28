@@ -4,6 +4,7 @@ import dev.kuband.driver.Driver;
 import dev.kuband.entities.Reimbursement;
 import dev.kuband.entities.Status;
 /*import dev.kuband.repositories.ReimbursementDAO;*/
+import dev.kuband.entities.Users;
 import dev.kuband.repositories.UsersAndReimbursementDAO;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class ReimbursementServiceImpl implements ReimbursementService{
 
     @Override
     public Reimbursement createReimbursement(Reimbursement reimbursement) {
-
         if (reimbursement.getDescription().length() == 0 || reimbursement.getAmount() <= 0) {
+
             throw new RuntimeException("description and amount cannot be empty");
         } else {
             Reimbursement savedReimbursement = this.usersAndReimbursementDAO.createReimbursement(reimbursement);
@@ -44,7 +45,17 @@ public class ReimbursementServiceImpl implements ReimbursementService{
 
     @Override
     public List<Reimbursement> getAllReimbursement() {
+        if (!Driver.currentUsers.isAdmin()){
+            System.out.println(Driver.currentUsers.isAdmin());
+            throw new RuntimeException("Need to be an admin to access this feature");
+        }
+        System.out.println(Driver.currentUsers.isAdmin());
         return this.usersAndReimbursementDAO.getAllReimbursement();
+    }
+
+    @Override
+    public List<Reimbursement> getAllReimbursementByUsers(Users users) {
+        return this.usersAndReimbursementDAO.getAllReimbursementByUsers(users);
     }
 
 /*    @Override

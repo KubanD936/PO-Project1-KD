@@ -29,22 +29,22 @@ public class Reimbursement {
                 ", user='" + user + '\'' +
                 ", amount=" + amount +
                 ", description='" + description + '\'' +
-                ", status=" + status +
+                ", status=" + status.name() +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reimbursement that = (Reimbursement) o;
-        return reimbursement_id == that.reimbursement_id && amount == that.amount && Objects.equals(user, that.user) && Objects.equals(description, that.description) && status == that.status;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(reimbursement_id, user, amount, description, status);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Reimbursement that = (Reimbursement) o;
+//        return reimbursement_id == that.reimbursement_id && amount == that.amount && Objects.equals(user, that.user) && Objects.equals(description, that.description) && status == that.status;
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(reimbursement_id, user, amount, description, status);
+//    }
 
     public int getReimbursement_id() {
         return reimbursement_id;

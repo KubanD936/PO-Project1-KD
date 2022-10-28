@@ -2,6 +2,7 @@ package dev.kuband.services;
 
 import dev.kuband.entities.Users;
 /*import dev.kuband.repositories.UsersDAO;*/
+import dev.kuband.exceptions.InvlaidInputException;
 import dev.kuband.repositories.UsersAndReimbursementDAO;
 
 public class UsersServiceImpl implements  UsersService{
@@ -59,7 +60,7 @@ public class UsersServiceImpl implements  UsersService{
     @Override
     public String updateIsAdminPrivilege(Users users) {
         if(users.getUsername().length() == 0 && users.getPassword().length() == 0){
-            throw new RuntimeException("Username and Password field can't be empty");
+            throw new InvlaidInputException("Username and Password field can't be empty");
         } else {
             String savedUsers = this.usersAndReimbursementDAO.updateAdminPrivilege(users);
             return savedUsers;

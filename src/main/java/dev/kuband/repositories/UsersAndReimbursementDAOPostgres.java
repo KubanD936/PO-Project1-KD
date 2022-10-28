@@ -77,7 +77,47 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
                 reimbursement.setReimbursement_id(resultSet.getInt("reimbursement_id"));
                 reimbursement.setAmount(resultSet.getInt("amount"));
                 reimbursement.setDescription(resultSet.getString("description"));
-                reimbursement.setStatus(Status.valueOf(resultSet.getString("status")));
+                Status status = Status.valueOf(resultSet.getString("status"));
+                if(status != null){
+                    reimbursement.setStatus(status);
+                }
+                else{
+                    reimbursement.setStatus(Status.PENDING);
+                }
+//                reimbursement.setStatus(Status.valueOf(resultSet.getString("status")));
+                reimbursementList.add(reimbursement);
+            }
+            return reimbursementList;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Reimbursement> getAllReimbursementByUsers(Users users) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "select * from reimbursements where username = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, users.getUsername());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Reimbursement> reimbursementList = new ArrayList();
+
+            while (resultSet.next()) {
+                Reimbursement reimbursement = new Reimbursement();
+                reimbursement.setReimbursement_id(resultSet.getInt("reimbursement_id"));
+                reimbursement.setAmount(resultSet.getInt("amount"));
+                reimbursement.setDescription(resultSet.getString("description"));
+                Status status = Status.valueOf(resultSet.getString("status"));
+                if(status != null){
+                    reimbursement.setStatus(status);
+                }
+                else{
+                    reimbursement.setStatus(Status.PENDING);
+                }
+//                reimbursement.setStatus(Status.valueOf(resultSet.getString("status")));
                 reimbursementList.add(reimbursement);
             }
             return reimbursementList;
@@ -110,7 +150,7 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
             if (reimbursement.getStatus().equals(Status.DENIED)){
                 return "This reimbursement request has been denied and can't be changed";
             }
-            sql = "update reimbursement set status = ? where reimbursement_id = ?";
+            sql = "update reimbursements set status = ? where reimbursement_id = ?";
             preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, status.name());
             preparedStatement.setInt(2, reimbursement_id);

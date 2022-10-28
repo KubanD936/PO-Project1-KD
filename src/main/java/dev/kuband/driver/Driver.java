@@ -42,6 +42,8 @@ public class Driver {
 
         app.post("/changeStatus", reimbursementController.updateReimbursementHandler);
 
+        app.get("/getAllTheseUsers", reimbursementController.getAllThisUserReimbursements);
+
         /*app.get("reimbursements/{reimbursement_id}", reimbursementController.getReimbursementByIdHandler);*/
 
 

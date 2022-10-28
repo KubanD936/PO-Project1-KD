@@ -19,13 +19,19 @@ public class ReimbursementController {
         String json = ctx.body();
         Gson gson = new Gson();
         Reimbursement reimbursement = gson.fromJson(json, Reimbursement.class);
-        Reimbursement registeredReimbursement = Driver.reimbursementService.createReimbursement(reimbursement);
-        if (registeredReimbursement == null){
+        try {
+            Reimbursement registeredReimbursement = Driver.reimbursementService.createReimbursement(reimbursement);
+            if (registeredReimbursement == null) {
+                ctx.status(400);
+                ctx.result("Amount, Description, and Type can't be empty");
+            } else {
+                ctx.status(201);
+                ctx.result("Reimbursement request " + registeredReimbursement.getReimbursement_id() + " has been registered!");
+            }
+        }
+        catch (RuntimeException e){
             ctx.status(400);
-            ctx.result("Amount, Description, and Type can't be empty");
-        } else {
-            ctx.status(201);
-            ctx.result("Reimbursement request "+registeredReimbursement.getReimbursement_id()+ " has been registered!");
+            ctx.result(e.getMessage());
         }
     };
 
@@ -41,16 +47,48 @@ public class ReimbursementController {
     public Handler getAllReimbursements = (ctx) -> {
         /*String json = ctx.body();
         Gson gson = new Gson();*/
-        UsersAndReimbursementDAOPostgres usersAndReimbursementDAOPostgres = new UsersAndReimbursementDAOPostgres();
-        String reimbursements = String.valueOf(usersAndReimbursementDAOPostgres.getAllReimbursement());
-        if (reimbursements.equals("Not logged in!")){
-            ctx.status(401);
-            ctx.result("Not logged in");
-        } else{
-            ctx.status(200);
-            ctx.result("Displaying all tickets");
+//        UsersAndReimbursementDAOPostgres usersAndReimbursementDAOPostgres = new UsersAndReimbursementDAOPostgres();
+        try {
+            String reimbursements = String.valueOf(Driver.reimbursementService.getAllReimbursement());
+            if (reimbursements.equals("Not logged in!")) {
+                ctx.status(401);
+                ctx.result("Not logged in");
+            } else {
+                ctx.status(200);
+                ctx.result("Displaying all tickets");
+            }
+            ctx.result(reimbursements);
         }
-        ctx.result(reimbursements);
+        catch (RuntimeException e){
+            ctx.status(401);
+            ctx.result(e.getMessage());
+        }
+    };
+
+    public Handler getAllThisUserReimbursements = (ctx) -> {
+        /*String json = ctx.body();
+        Gson gson = new Gson();*/
+//        UsersAndReimbursementDAOPostgres usersAndReimbursementDAOPostgres = new UsersAndReimbursementDAOPostgres();
+        try {
+            List<Reimbursement> reimbursement = Driver.reimbursementService.getAllReimbursementByUsers(Driver.currentUsers);
+            String reimbursements = String.valueOf(reimbursement);
+            String output = "";
+            for (Reimbursement r : reimbursement) {
+                output += r.toString();
+            }
+            if (reimbursements.equals("Not logged in!")) {
+                ctx.status(401);
+                ctx.result("Not logged in");
+            } else {
+                ctx.status(200);
+                ctx.result("Displaying all tickets");
+            }
+            ctx.result(output);
+        }
+        catch (RuntimeException e){
+            ctx.status(401);
+            ctx.result(e.getMessage());
+        }
     };
 
 /*
