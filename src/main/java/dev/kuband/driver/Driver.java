@@ -56,7 +56,7 @@ public class Driver {
 
 //        app.post("/updateUserToAdmin", usersController.updateIsAdminHandler);
 
-        app.post("/updateUsers", usersController.updateUsersHandler);
+//        app.post("/updateUsers", usersController.updateUsersHandler);
 
         app.start();
     }

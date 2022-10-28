@@ -89,30 +89,30 @@ public class UsersController {
 //        ctx.result(usersString);
 //    };
 
-    public Handler updateUsersHandler = (ctx) -> {
-        if (Driver.currentUsers == null) {
-            ctx.status(400);
-            ctx.result("Need to log in");
-        } else {
-            String usersJson = ctx.body();
-            Gson gson = new Gson();
-            Users users = gson.fromJson(usersJson, Users.class);
-            users.setUsername(Driver.currentUsers.getUsername());
-            users.setAdmin(Driver.currentUsers.isAdmin());
-            users.setUser_id(Driver.currentUsers.getUser_id());
-            if (users.getPassword() == null){
-                users.setPassword(Driver.currentUsers.getPassword());
-            }
-            String employeeString = Driver.usersService.updateUsers(users);
-            if (Driver.currentUsers == null){
-                ctx.status(400);
-                ctx.result("You are not logged in!");
-            } else{
-                ctx.status(201);
-                ctx.result(employeeString);
-            }
-        }
-    };
+//    public Handler updateUsersHandler = (ctx) -> {
+//        if (Driver.currentUsers == null) {
+//            ctx.status(400);
+//            ctx.result("Need to log in");
+//        } else {
+//            String usersJson = ctx.body();
+//            Gson gson = new Gson();
+//            Users users = gson.fromJson(usersJson, Users.class);
+//            users.setUsername(Driver.currentUsers.getUsername());
+//            users.setAdmin(Driver.currentUsers.isAdmin());
+//            users.setUser_id(Driver.currentUsers.getUser_id());
+//            if (users.getPassword() == null){
+//                users.setPassword(Driver.currentUsers.getPassword());
+//            }
+//            String employeeString = Driver.usersService.updateUsers(users);
+//            if (Driver.currentUsers == null){
+//                ctx.status(400);
+//                ctx.result("You are not logged in!");
+//            } else{
+//                ctx.status(201);
+//                ctx.result(employeeString);
+//            }
+//        }
+//    };
 }
 
 /*    public Handler getUsersByIdHandler = (ctx) ->{

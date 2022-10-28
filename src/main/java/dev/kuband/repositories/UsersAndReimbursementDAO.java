@@ -35,7 +35,7 @@ public interface UsersAndReimbursementDAO {
 
     /*ArrayList<Reimbursement> login(Users users);*/
 
-    String updateUsers(Users users);
+//    String updateUsers(Users users);
 
 //    String updateAdminPrivilege(Users users);
 }

@@ -18,8 +18,13 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
             String sql = "insert into reimbursements values(default, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             //Setting parameters for above SQL statement
-            System.out.println(Driver.currentUsers.getUsername());
-            preparedStatement.setString(1, Driver.currentUsers.getUsername());
+            if(Driver.currentUsers == null){
+                preparedStatement.setString(1, reimbursement.getUser());
+            }
+            else {
+                System.out.println(Driver.currentUsers.getUsername());
+                preparedStatement.setString(1, Driver.currentUsers.getUsername());
+            }
             preparedStatement.setInt(2, reimbursement.getAmount());
             preparedStatement.setString(3, reimbursement.getDescription());
             preparedStatement.setString(4, String.valueOf(reimbursement.getStatus()));
@@ -117,6 +122,7 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
                 else{
                     reimbursement.setStatus(Status.PENDING);
                 }
+//                reimbursement.setUser(users.getUsername());
 //                reimbursement.setStatus(Status.valueOf(resultSet.getString("status")));
                 reimbursementList.add(reimbursement);
             }
@@ -131,7 +137,7 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
     @Override
     public String changeStatus(int reimbursement_id, Status status) {
         if (Driver.currentUsers == null){
-            return "You are not logged in";
+//            return "You are not logged in";
         } else if(!Driver.currentUsers.isAdmin()){
             return "Need to be admin to change this";
         }
@@ -331,27 +337,27 @@ public class UsersAndReimbursementDAOPostgres implements UsersAndReimbursementDA
         return null;
     }
 */
-    @Override
-    public String updateUsers(Users users) {
-        try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "update users set username = ?, password = ?, isAdmin = ? where user_id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            preparedStatement.setString(1, users.getUsername());
-            preparedStatement.setString(2, users.getPassword());
-            preparedStatement.setBoolean(3, users.isAdmin());
-
-            int rs = preparedStatement.executeUpdate();
-            if (rs == 0){
-                return "Change failed\r\nInvalid user";
-            } else {
-                return "Change success"+users.getUser_id() + " this user was updated";
-            }
-        } catch(SQLException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    @Override
+//    public String updateUsers(Users users) {
+//        try(Connection connection = ConnectionFactory.getConnection()){
+//            String sql = "update users set username = ?, password = ?, isAdmin = ? where user_id = ?";
+//            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//
+//            preparedStatement.setString(1, users.getUsername());
+//            preparedStatement.setString(2, users.getPassword());
+//            preparedStatement.setBoolean(3, users.isAdmin());
+//
+//            int rs = preparedStatement.executeUpdate();
+//            if (rs == 0){
+//                return "Change failed\r\nInvalid user";
+//            } else {
+//                return "Change success"+users.getUser_id() + " this user was updated";
+//            }
+//        } catch(SQLException e){
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
 //    @Override
 //    public String updateAdminPrivilege(Users users) {

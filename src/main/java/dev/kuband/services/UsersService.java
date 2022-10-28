@@ -15,7 +15,7 @@ public interface UsersService {
 
 //    String updateIsAdminPrivilege(Users users);
 
-    String updateUsers(Users users);
+//    String updateUsers(Users users);
 
 
     //Users getUsersById(int user_id);
