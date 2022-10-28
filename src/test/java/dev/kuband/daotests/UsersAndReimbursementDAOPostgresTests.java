@@ -67,7 +67,7 @@ public class UsersAndReimbursementDAOPostgresTests {
     @Test
     @Order(6)
     void create_new_user_test(){
-        fakeUser = new Users(0, "Delion1", "pass", true);
+        fakeUser = new Users(0, "Delion2", "pass", true);
         Users createdUser = usersAndReimbursementDAO.createUsers(fakeUser);
         Assertions.assertNotNull(fakeUser);
     }
