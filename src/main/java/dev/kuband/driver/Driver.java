@@ -27,7 +27,12 @@ public class Driver {
 
 
     public static void main (String[] args){
-        Javalin app = Javalin.create();
+        Javalin app = Javalin.create(//config lambda - lets us specify certain configurations for our Javalin app
+                config -> {
+                    config.enableCorsForAllOrigins(); //lets us process HTTP requests from anywhere
+                }
+                //may not need to do this if you've containerized? Patrick may know lol
+        );
 
         ReimbursementController reimbursementController = new ReimbursementController();
         UsersController usersController = new UsersController();
