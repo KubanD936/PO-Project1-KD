@@ -109,25 +109,32 @@ async function createUser(){
 
     let makeUsername = document.getElementById("createUsername").value;
     let makePassword = document.getElementById("createPassword").value;
+    let admin = document.getElementById("isAdminFalse").checked ? false : true;
 
-    let newUser = {
-        user_id: 0, 
-        username: makeUsername,
-        password: makePassword,
-        isAdmin: isAdminInput,
-        status: 0
-    } 
+    // let newUser = {
+    //     // user_id: 0, 
+    //     username: makeUsername,
+    //     password: makePassword,
+    //     admin: admin
+    //     // status: 0
+    // } 
 
     let response = await fetch(url + "/createUser",{
         method: "POST", //send a POST requests (would be GET if we didn't specify)
-        body: JSON.stringify(newUser) //turn the newReimbursement into JSON, and send it in the request body
+        body: JSON.stringify({
+            // user_id: 0, 
+            username: makeUsername,
+            password: makePassword,
+            admin: admin
+            // status: 0
+        }) //turn the newReimbursement into JSON, and send it in the request body
     });
 
     //log the response just so we can see what comes back
     console.log(response)
 
     //popup to tell the user their new reimbursement was created
-    if(response.status === 201){
+    if(response.status === 200){
         alert("New User Created: Username: " + makeUsername + " Password: " + makePassword)
     }
 
@@ -143,10 +150,10 @@ async function logInUser(){
 
     //now we have the inputs, but we need to put them in an object to send in the fetch 
     let logInUser = {
-        user_id: 0, 
-        username: logInUsername,
-        password: logInPassword,
-        isAdmin: 0,
+        // user_id: 0, 
+        username : logInUsername,
+        password : logInPassword,
+        // isAdmin: 0,
     }  
 
 
@@ -154,11 +161,12 @@ async function logInUser(){
         method: "POST", //send a POST requests (would be GET if we didn't specify)
         body: JSON.stringify(logInUser)
     });
-
+    
+    console.log(JSON.stringify(logInUser))
     console.log(response)
 
 
-    if(response.status === 201){
+    if(response.status === 202){
         alert("User Logged In: Username: " + logInUsername + " Password: " + logInPassword)
     }
 
