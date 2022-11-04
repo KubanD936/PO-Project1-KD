@@ -45,8 +45,9 @@ public class ReimbursementController {
 
     //View tickets
     public Handler getAllReimbursements = (ctx) -> {
-        /*String json = ctx.body();
-        Gson gson = new Gson();*/
+//        String reimbursementJSON = ctx.body();
+//        Gson gson = new Gson();
+//        Reimbursement reimbursement = gson.fromJson(reimbursementJSON, Reimbursement.class);
 //        UsersAndReimbursementDAOPostgres usersAndReimbursementDAOPostgres = new UsersAndReimbursementDAOPostgres();
         try {
             String reimbursements = String.valueOf(Driver.reimbursementService.getAllReimbursement());
@@ -66,8 +67,9 @@ public class ReimbursementController {
     };
 
     public Handler getAllThisUserReimbursements = (ctx) -> {
-        /*String json = ctx.body();
-        Gson gson = new Gson();*/
+//        String reimbursementJSON = ctx.body();
+//        Gson gson = new Gson();
+//        Reimbursement reimbursement = gson.fromJson(reimbursementJSON, Reimbursement.class);
 //        UsersAndReimbursementDAOPostgres usersAndReimbursementDAOPostgres = new UsersAndReimbursementDAOPostgres();
         try {
             List<Reimbursement> reimbursement = Driver.reimbursementService.getAllReimbursementByUsers(Driver.currentUsers);
